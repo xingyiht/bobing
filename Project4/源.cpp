@@ -66,7 +66,7 @@ public:
 int i = 0;
 int j = 0;
 int main()
-{       PlaySound(TEXT("背景音乐2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+{       PlaySound(TEXT("背景音乐2.mp3"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	int n;//参加人数
 	SetWindowText(GetHWnd(), "博饼");
 	initgraph(360, 760);//初始化一个图形窗口
