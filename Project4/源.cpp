@@ -11,67 +11,69 @@
 #include<cassert>
 #include<ctime>
 #include <stdlib.h>
+#include<Mmsystem.h>
+#pragma comment(lib,"winmm.lib")
 #pragma warning(disable:4996)
 using namespace std;
 class button
 {
 public:
 	int x;
-	int y;//(x,y)°´¼ü×óÉÏ½ÇµÄÎ»ÖÃ
-	int width;//°´¼ü¿í¶È
-	int height;//°´¼ü¸ß¶È
-	COLORREF color;//°´¼üµÄÑÕÉ«£¬ÑÕÉ«È«²¿¶¼ÊÇ´óÐ´µÄÓ¢ÎÄµ¥´Ê
-	char* str;//°´¼üÉÏµÄ×Ö
-	void build(int x_, int y_, int width_, int height_, COLORREF color_, const char* str_) //¶Ô°´¼ü½øÐÐ³õÊ¼»¯£¬ÕâÀïÒ²¿ÉÒÔÖ±½ÓÓÃ¹¹Ôìº¯Êý
+	int y;//(x,y)æŒ‰é”®å·¦ä¸Šè§’çš„ä½ç½®
+	int width;//æŒ‰é”®å®½åº¦
+	int height;//æŒ‰é”®é«˜åº¦
+	COLORREF color;//æŒ‰é”®çš„é¢œè‰²ï¼Œé¢œè‰²å…¨éƒ¨éƒ½æ˜¯å¤§å†™çš„è‹±æ–‡å•è¯
+	char* str;//æŒ‰é”®ä¸Šçš„å­—
+	void build(int x_, int y_, int width_, int height_, COLORREF color_, const char* str_) //å¯¹æŒ‰é”®è¿›è¡Œåˆå§‹åŒ–ï¼Œè¿™é‡Œä¹Ÿå¯ä»¥ç›´æŽ¥ç”¨æž„é€ å‡½æ•°
 	{
 		x = x_;
 		y = y_;
 		width = width_;
 		height = height_;
 		color = color_;
-		str = new char[strlen(str_) + 1];//×Ö·ûÖ¸ÕëÐèÒªÔ¤ÏÈ·ÖÅäÄÚ´æ
-		strcpy(str, str_);//¸´ÖÆ×Ö·û´®
+		str = new char[strlen(str_) + 1];//å­—ç¬¦æŒ‡é’ˆéœ€è¦é¢„å…ˆåˆ†é…å†…å­˜
+		strcpy(str, str_);//å¤åˆ¶å­—ç¬¦ä¸²
 	}
-	void drawbutton()//»­³ö°´¼ü
+	void drawbutton()//ç”»å‡ºæŒ‰é”®
 	{
-		setfillcolor(color);//ÉèÖÃÌî³äµÄÑÕÉ«Îª°´¼üµÄÑÕÉ«
-		settextstyle(35, 0, "ËÎÌå");//ÉèÖÃ×ÖÌåÊôÐÔ£¬¿í¶È35£¬¸ß¶È0£¨×ÔÊÊÓ¦£©
-		setlinecolor(BLACK);//ÉèÖÃ±ß¿òÏßÌõÑÕÉ«
-		settextcolor(BLACK);//ÉèÖÃ×ÖÌåÑÕÉ«
-		setbkmode(TRANSPARENT);//ÉèÖÃ×ÖÌå±³¾°ÎªÍ¸Ã÷treansparent
-		fillrectangle(x, y, x + width, y + height);//Ìî³ä³öÒ»¸ö¾ØÐÎ£¬²ÎÊýÎª¸Ã¾ØÐÎµÄ×óÉÏºÍÓÒÏÂµÄ×ø±ê£¬ÑÕÉ«ÎªÉÏÃæËùÉèÖÃµÄÑÕÉ«Ä¬ÈÏÎªºÚÉ«
-		outtextxy(x + 5, y + 5, str);//ÔÚx+5,y+5Î»ÖÃÊä³öÉèÖÃºÃµÄ×ÖÌåÎÄ×Östr
+		setfillcolor(color);//è®¾ç½®å¡«å……çš„é¢œè‰²ä¸ºæŒ‰é”®çš„é¢œè‰²
+		settextstyle(35, 0, "å®‹ä½“");//è®¾ç½®å­—ä½“å±žæ€§ï¼Œå®½åº¦35ï¼Œé«˜åº¦0ï¼ˆè‡ªé€‚åº”ï¼‰
+		setlinecolor(BLACK);//è®¾ç½®è¾¹æ¡†çº¿æ¡é¢œè‰²
+		settextcolor(BLACK);//è®¾ç½®å­—ä½“é¢œè‰²
+		setbkmode(TRANSPARENT);//è®¾ç½®å­—ä½“èƒŒæ™¯ä¸ºé€æ˜Žtreansparent
+		fillrectangle(x, y, x + width, y + height);//å¡«å……å‡ºä¸€ä¸ªçŸ©å½¢ï¼Œå‚æ•°ä¸ºè¯¥çŸ©å½¢çš„å·¦ä¸Šå’Œå³ä¸‹çš„åæ ‡ï¼Œé¢œè‰²ä¸ºä¸Šé¢æ‰€è®¾ç½®çš„é¢œè‰²é»˜è®¤ä¸ºé»‘è‰²
+		outtextxy(x + 5, y + 5, str);//åœ¨x+5,y+5ä½ç½®è¾“å‡ºè®¾ç½®å¥½çš„å­—ä½“æ–‡å­—str
 	}
-	//Êó±ê½»»¥µÄÒ»²¿·Ö
-	bool mouseInButton(MOUSEMSG m)//ÓÃÓÚÅÐ¶ÏÊó±êÊÇ·ñÔÚ°´¼üµÄ·¶Î§ÄÚ
+	//é¼ æ ‡äº¤äº’çš„ä¸€éƒ¨åˆ†
+	bool mouseInButton(MOUSEMSG m)//ç”¨äºŽåˆ¤æ–­é¼ æ ‡æ˜¯å¦åœ¨æŒ‰é”®çš„èŒƒå›´å†…
 	{
-		//m.x,m.y±íÊ¾¸ÃÊó±êµÄºá×Ý×ø±ê
+		//m.x,m.yè¡¨ç¤ºè¯¥é¼ æ ‡çš„æ¨ªçºµåæ ‡
 		if (m.x >= x && m.x <= x + width && m.y >= y && m.y <= y + height)
 		{
-			color = RED;//Èç¹ûÔÚ¾Í½«°´¼üÑÕÉ«¸Ä±ä
+			color = RED;//å¦‚æžœåœ¨å°±å°†æŒ‰é”®é¢œè‰²æ”¹å˜
 			return true;
 		}
 		else
 		{
-			color = YELLOW;//±ä»ØÀ´
+			color = YELLOW;//å˜å›žæ¥
 			return false;
 		}
 	}
-	~button() {//Îö¹¹º¯Êý
+	~button() {//æžæž„å‡½æ•°
 		delete[]str;
 	}
 };
 int i = 0;
 int j = 0;
 int main()
-{
-	int n;//²Î¼ÓÈËÊý
-	SetWindowText(GetHWnd(), "²©±ý");
-	initgraph(360, 760);//³õÊ¼»¯Ò»¸öÍ¼ÐÎ´°¿Ú
+{       PlaySound(TEXT("èƒŒæ™¯éŸ³ä¹2.wav"), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+	int n;//å‚åŠ äººæ•°
+	SetWindowText(GetHWnd(), "åšé¥¼");
+	initgraph(360, 760);//åˆå§‹åŒ–ä¸€ä¸ªå›¾å½¢çª—å£
 	IMAGE zz = 0;//
 	IMAGE mm = 0;//
-	IMAGE nn = 0;//¶¨ÒåÒ»¸öÍ¼ÐÎ±äÁ¿²¢³õÊ¼»¯
-	IMAGE ww = 0;//Íë
+	IMAGE nn = 0;//å®šä¹‰ä¸€ä¸ªå›¾å½¢å˜é‡å¹¶åˆå§‹åŒ–
+	IMAGE ww = 0;//ç¢—
 	IMAGE img[64];
 	IMAGE tz1, tz2, tz3, tz4, tz5, tz6;
 	loadimage(&tz1, "01.png", 48, 48);
@@ -85,25 +87,25 @@ int main()
 		sprintf(filename, "%d.png", i);
 		loadimage(&img[i - 1], filename, 360, 330);
 	}
-	//¼ÓÔØÒ¡É«×Ó¶¯»­
+	//åŠ è½½æ‘‡è‰²å­åŠ¨ç”»
 menu:
 	loadimage(&mm, "photo.png", 360, 760);
 	putimage(0, 0, &mm);
 	button b1, b2,b3;
-	b1.build(105, 250, 150, 50, YELLOW, "¿ªÊ¼ÓÎÏ·");
-	b1.drawbutton();//½«°´¼ü»­³ö
-	b2.build(105, 330, 150, 50, YELLOW, "ÓÎÏ·¹æÔò");
+	b1.build(105, 250, 150, 50, YELLOW, "å¼€å§‹æ¸¸æˆ");
+	b1.drawbutton();//å°†æŒ‰é”®ç”»å‡º
+	b2.build(105, 330, 150, 50, YELLOW, "æ¸¸æˆè§„åˆ™");
 	b2.drawbutton();
-	b3.build(105, 410, 150, 50, YELLOW, "ÓÎÏ·½±Æ·");
+	b3.build(105, 410, 150, 50, YELLOW, "æ¸¸æˆå¥–å“");
 	b3.drawbutton();
 	while (1)
 	{
-		//¸üÐÂ°´¼ü£¬¶Ô°´¼ü½øÐÐÖØÐÂ»æÖÆ
+		//æ›´æ–°æŒ‰é”®ï¼Œå¯¹æŒ‰é”®è¿›è¡Œé‡æ–°ç»˜åˆ¶
 		b1.drawbutton();
 		b2.drawbutton();
 		b3.drawbutton();
 		MOUSEMSG m = GetMouseMsg();
-		if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//µ±Êó±êÔÚ°´¼üµÄ·¶Î§ÄÚÇÒ×ó¼ü°´ÏÂ£¬WM_LBUTTONDOWN----window message left button down
+		if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//å½“é¼ æ ‡åœ¨æŒ‰é”®çš„èŒƒå›´å†…ä¸”å·¦é”®æŒ‰ä¸‹ï¼ŒWM_LBUTTONDOWN----window message left button down
 		{
 			goto index;
 		}
@@ -115,24 +117,24 @@ menu:
 		{
 			goto prize;
 		}
-	}//Ö÷²Ëµ¥
+	}//ä¸»èœå•
 index:
 	b1.build(0, 0, 0, 0, YELLOW, "");
 	b1.drawbutton();
 	b2.build(0, 0, 0, 0, YELLOW, "");
 	b2.drawbutton();
 	loadimage(&mm, "photo.png", 360, 760);
-	putimage(0, 0, &mm);//Ïû³ý°´¼ü
-	settextstyle(16, 0, "ºÚÌå");
+	putimage(0, 0, &mm);//æ¶ˆé™¤æŒ‰é”®
+	settextstyle(16, 0, "é»‘ä½“");
 	settextcolor(WHITE);
-	outtextxy(100, 305, "ÇëÊäÈë²Î¼ÓÈËÊýºó»Ø³µ");
+	outtextxy(100, 305, "è¯·è¾“å…¥å‚åŠ äººæ•°åŽå›žè½¦");
 	scanf("%d", &n);
 	struct play {
-		int numb; //Íæ¼ÒÐòºÅ 
-		int a[6]; //É«×ÓµãÊý
-		int A[6];//É«×Ó¼ÆÊýÆ÷ 
-		char x[10];//ÖÐ½±ÀàÐÍ£¨¼¶±ð£©		 
-	}player[1000];//¶¨ÒåÍæ¼ÒÐÅÏ¢
+		int numb; //çŽ©å®¶åºå· 
+		int a[6]; //è‰²å­ç‚¹æ•°
+		int A[6];//è‰²å­è®¡æ•°å™¨ 
+		char x[10];//ä¸­å¥–ç±»åž‹ï¼ˆçº§åˆ«ï¼‰		 
+	}player[1000];//å®šä¹‰çŽ©å®¶ä¿¡æ¯
 	for (i = 0; i < 1000; i++) {
 		for (j = 0; j < 6; j++) {
 			player[i].A[j] = 0;
@@ -140,65 +142,65 @@ index:
 	}
 	for ( i = 0; i < n; i++) {
 		for ( j = 0; j < 6; j++) {
-			player[i].a[j] = rand() % 5 + 1;//Ëæ»úÉ«×Ó¸³Öµ
+			player[i].a[j] = rand() % 5 + 1;//éšæœºè‰²å­èµ‹å€¼
 		}
 		for ( j = 0; j < 6; j++) {
 			player[i].A[player[i].a[j] - 1]++;
 		}
-		//É«×Ó¼ÆÊýÆ÷¼ÆÊý 
+		//è‰²å­è®¡æ•°å™¨è®¡æ•° 
 		if (player[i].A[3] == 4 && player[i].A[1] == 2)
-			strcpy(player[i].x, "²å½ð»¨");
+			strcpy(player[i].x, "æ’é‡‘èŠ±");
 		else if (player[i].A[3] == 6)
-			strcpy(player[i].x, "Áùºì²ª");
+			strcpy(player[i].x, "å…­çº¢å‹ƒ");
 		else if (player[i].A[0] == 6)
-			strcpy(player[i].x, "±éµØ½õ");
+			strcpy(player[i].x, "éåœ°é”¦");
 		else if (player[i].A[1] == 6)
-			strcpy(player[i].x, "ºÚÁù²ª");
+			strcpy(player[i].x, "é»‘å…­å‹ƒ");
 		else if (player[i].A[3] == 5)
-			strcpy(player[i].x, "Îåºì");
+			strcpy(player[i].x, "äº”çº¢");
 		else if (player[i].A[1] == 5)
-			strcpy(player[i].x, "Îå×ÓµÇ¿Æ");
+			strcpy(player[i].x, "äº”å­ç™»ç§‘");
 		else if (player[i].A[3] == 4)
-			strcpy(player[i].x, "ËÄºì");
+			strcpy(player[i].x, "å››çº¢");
 		else if (player[i].A[0] == 1 && player[i].A[1] == 1 && player[i].A[2] == 1 && player[i].A[3] == 1 && player[i].A[4] == 1 && player[i].A[5] == 1)
-			strcpy(player[i].x, "¶ÔÌÃ");
+			strcpy(player[i].x, "å¯¹å ‚");
 		else if (player[i].A[3] == 3)
-			strcpy(player[i].x, "Èýºì");
+			strcpy(player[i].x, "ä¸‰çº¢");
 		else if (player[i].A[0] == 4)
-			strcpy(player[i].x, "ËÄ½ø");
+			strcpy(player[i].x, "å››è¿›");
 		else if (player[i].A[3] == 2)
-			strcpy(player[i].x, "¶þ¾Ù");
+			strcpy(player[i].x, "äºŒä¸¾");
 		else if (player[i].A[3] == 1)
-			strcpy(player[i].x, "Ò»Ðã");
-		else strcpy(player[i].x, "ÎÞ");
+			strcpy(player[i].x, "ä¸€ç§€");
+		else strcpy(player[i].x, "æ— ");
 	}
 	
-	loadimage(&ww, "Íë.png", 360, 330);
-	putimage(0, 0, &ww);//¼ÓÔØÍë
+	loadimage(&ww, "ç¢—.png", 360, 330);
+	putimage(0, 0, &ww);//åŠ è½½ç¢—
 	setfillcolor(RED);
 	fillrectangle(5, 360, 355, 760);
-	outtextxy(160, 340, "¼ÇÂ¼");
+	outtextxy(160, 340, "è®°å½•");
 	for (int i = 1; i <= n; i++) {
 		char str[10];
 		sprintf(str, "%d", i);
 		outtextxy(8, 358 + i * 25, str);
-		outtextxy(10, 358 + i * 25, " ºÅÍæ¼Ò»ñµÃÁË  ");
+		outtextxy(10, 358 + i * 25, " å·çŽ©å®¶èŽ·å¾—äº†  ");
 	}
-	b1.build(120, 280, 110, 40, YELLOW, "Ò¡÷»×Ó");
-	b1.drawbutton();//½«°´¼ü»­³ö
+	b1.build(120, 280, 110, 40, YELLOW, "æ‘‡éª°å­");
+	b1.drawbutton();//å°†æŒ‰é”®ç”»å‡º
 	i = 0;
 	while (i<n) {
 		b1.drawbutton();
 		MOUSEMSG m = GetMouseMsg();
 
-		if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//µ±Êó±êÔÚ°´¼üµÄ·¶Î§ÄÚÇÒ×ó¼ü°´ÏÂ
+		if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//å½“é¼ æ ‡åœ¨æŒ‰é”®çš„èŒƒå›´å†…ä¸”å·¦é”®æŒ‰ä¸‹
 		{
 
 			int count = 0;
 			while (count <= 64) {
 				putimage(0, 0, &img[count++]);
 				Sleep(33);
-				count++;//É«×Ó¶¯»­
+				count++;//è‰²å­åŠ¨ç”»
 			}
 
 			for (int j = 0; j < 6; j++) {
@@ -222,21 +224,21 @@ index:
 					putimage(105 + j % 3 * 50, 120 + (j / 3) * 50, &tz6);
 				}
 			}
-			settextstyle(18, 0, "ºÚÌå");
+			settextstyle(18, 0, "é»‘ä½“");
 			settextcolor(WHITE);
 			
-			outtextxy(130, 383 + i * 25, player[i].x);//Êä³öÍæ¼Ò»ñ½±ÀàÐÍ
-			//ÏÔÊ¾É«×Ó
+			outtextxy(130, 383 + i * 25, player[i].x);//è¾“å‡ºçŽ©å®¶èŽ·å¥–ç±»åž‹
+			//æ˜¾ç¤ºè‰²å­
 			i++;
 		}
 		if (i == n) {
 			while (1) {
-				b1.build(105, 280, 147, 40, YELLOW, "ÔÙÀ´Ò»ÂÖ");
-				b2.build(105, 230, 147, 40, YELLOW, "·µ»Ø²Ëµ¥");
+				b1.build(105, 280, 147, 40, YELLOW, "å†æ¥ä¸€è½®");
+				b2.build(105, 230, 147, 40, YELLOW, "è¿”å›žèœå•");
 				b1.drawbutton();
 				b2.drawbutton();
 				MOUSEMSG m = GetMouseMsg();
-				if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//µ±Êó±êÔÚ°´¼üµÄ·¶Î§ÄÚÇÒ×ó¼ü°´ÏÂ£¬WM_LBUTTONDOWN----window message left button down
+				if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//å½“é¼ æ ‡åœ¨æŒ‰é”®çš„èŒƒå›´å†…ä¸”å·¦é”®æŒ‰ä¸‹ï¼ŒWM_LBUTTONDOWN----window message left button down
 				{
 					i = 0;
 					goto index;
@@ -250,36 +252,36 @@ index:
 		}
 	}
 rule:
-	b1.build(0, 0, 100, 40, YELLOW, "·µ»Ø");
+	b1.build(0, 0, 100, 40, YELLOW, "è¿”å›ž");
 	b1.drawbutton();
-	loadimage(&nn, "¹æÔò4.jpg", 360, 760);
+	loadimage(&nn, "è§„åˆ™4.jpg", 360, 760);
 	putimage(0, 0, &nn);
 	while (1)
 	{
 		b1.drawbutton();
 		MOUSEMSG m = GetMouseMsg();
-		if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//µ±Êó±êÔÚ°´¼üµÄ·¶Î§ÄÚÇÒ×ó¼ü°´ÏÂ£¬WM_LBUTTONDOWN----window message left button down
+		if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//å½“é¼ æ ‡åœ¨æŒ‰é”®çš„èŒƒå›´å†…ä¸”å·¦é”®æŒ‰ä¸‹ï¼ŒWM_LBUTTONDOWN----window message left button down
 		{
 			goto menu;
 		}
 	}
-	closegraph();//¹Ø±ÕÍ¼Ïñ
+	closegraph();//å…³é—­å›¾åƒ
 	return 0;
 prize:
-	b1.build(0, 0, 100, 40, YELLOW, "·µ»Ø");
+	b1.build(0, 0, 100, 40, YELLOW, "è¿”å›ž");
 	b1.drawbutton();
-	loadimage(&nn, "½±Æ·.png", 360, 760);
+	loadimage(&nn, "å¥–å“.png", 360, 760);
 	putimage(0, 0, &nn);
 	while (1)
 	{
 		b1.drawbutton();
 		MOUSEMSG m = GetMouseMsg();
-		if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//µ±Êó±êÔÚ°´¼üµÄ·¶Î§ÄÚÇÒ×ó¼ü°´ÏÂ£¬WM_LBUTTONDOWN----window message left button down
+		if (b1.mouseInButton(m) && m.uMsg == WM_LBUTTONDOWN)//å½“é¼ æ ‡åœ¨æŒ‰é”®çš„èŒƒå›´å†…ä¸”å·¦é”®æŒ‰ä¸‹ï¼ŒWM_LBUTTONDOWN----window message left button down
 		{
 			goto menu;
 		}
 	}
-	closegraph();//¹Ø±ÕÍ¼Ïñ
+	closegraph();//å…³é—­å›¾åƒ
 	return 0;
 }
 
